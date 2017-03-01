@@ -1,0 +1,17 @@
+{
+  "name": "starter",
+  "version": "1.0.0",
+  "description": "starter project using webpack 2",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf dist && webpack src/index.js dist/bundle.js"
+  },
+  "repository": "https://github.com/rafh/starter-project.git",
+  "author": "Rafael Heard rafael.heard@gmail.com",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "rimraf": "^2.6.1",
+    "webpack": "^2.2.1"
+  }
+}

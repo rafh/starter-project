@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtratTextPlugin = require('extract-text-webpack-plugin');
+var HTMLWebpackPlugin = require('html-webpack-plugin');
 
 // development variables
 var DEVELOPMENT = process.env.NODE_ENV === 'development';
@@ -24,7 +25,10 @@ var plugins = PRODUCTION
                 //     warnings: true
                 // }
             }),
-            new ExtratTextPlugin('style.css')
+            new ExtratTextPlugin('style-[contenthash:10].css'),
+            new HTMLWebpackPlugin({
+                template: 'index-template.html'
+            })
     ]
     :   [ new webpack.HotModuleReplacementPlugin() ];
 
@@ -35,8 +39,8 @@ plugins.push(
     })
 );
 
-// add class name devepending on enviroment
-const cssIndentifier = PRODUCTION ? '[hash:base64:10]' : '[path][name]--[local]';
+// add class name depending on enviroment PROD | DEV
+const cssIndentifier = PRODUCTION ? '[hash:base64:10]' : '[path][name]---[local]';
 
 // inject into head in DEV and create CSS file in PROD
 const cssLoader = PRODUCTION
@@ -68,7 +72,7 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, 'dist'),
-        publicPath: '/dist/',
-        filename: 'bundle.js'
+        publicPath: PRODUCTION ? '' : '/dist/',
+        filename: PRODUCTION ? 'bundle.[hash:12].min.js' : 'bundle.js'
     }
 };

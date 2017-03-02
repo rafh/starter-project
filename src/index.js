@@ -1,34 +1,38 @@
 var style = require('./style/global.css');
 
-var messages = require('./messages');
-
-// import Button from './button';
-// import Jungle from './image';
-
-// var newMessage = () => (`
-//     <p>
-//         ${messages.hi} ${messages.event}
-//         ${Jungle}
-//     </p>
-//
-// `);
-// var newMessage = () => (Button.button);
-// import from './style/global';
-import { multiply } from './mathStuff';
-const newMessage = () => (`
-    <div class="${style.box}">
-    DEV: ${DEVELOPMENT.toString()}<br>
-    PROD: ${PRODUCTION.toString()}<br>
-    </div>
-`);
+import $ from 'jquery';
 
 var app = document.getElementById('app');
-app.innerHTML = newMessage();
+app.innerHTML = `
+    <div id="menu">
+        <button id="loadPage1">Load Page 1</button>
+        <button id="loadPage2">Load Page 2</button>
+    </div>
+    <div id="content">
+        <h1>Homes</h1>
+    </div>
+`;
+
+const theEl = document.getElementById('content');
+
+document.getElementById('loadPage1').addEventListener('click', () => {
+    System.import('./page-1')
+        .then(pageModule => {
+            theEl.innerHTML = pageModule.default;
+        });
+});
+
+document.getElementById('loadPage2').addEventListener('click', () => {
+    System.import('./page-2')
+        .then(pageModule => {
+            theEl.innerHTML = pageModule.default;
+        });
+});
 
 // Button.attachEl();
 
 if (DEVELOPMENT) {
-    if(module.hot) {
+    if (module.hot) {
         module.hot.accept();
     }
 }

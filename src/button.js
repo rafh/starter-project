@@ -3,7 +3,7 @@ const Button = {
     attachEl: () => {
         document.getElementById('myButton').addEventListener('click',
             () => {
-                console.log('clicked');
+                console.log('init');
             }
         );
     }

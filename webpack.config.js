@@ -1,35 +1,32 @@
 var path = require('path');
 var webpack = require('webpack');
-var ExtratTextPlugin = require('extract-text-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
+// var autoprefixer = require('autoprefixer');
 
 // development variables
-var DEVELOPMENT = process.env.NODE_ENV === 'development';
-var PRODUCTION = process.env.NODE_ENV === 'production';
+const DEVELOPMENT = process.env.NODE_ENV === 'development';
+const PRODUCTION = process.env.NODE_ENV === 'production';
 
 // checks if production : development
-var entry = PRODUCTION
-    ?   [ './src/index.js' ]
+const entry = PRODUCTION
+    ?   [
+            './src/index.js'
+        ]
     :   [
             './src/index.js',
             'webpack/hot/dev-server',
-            'webpack-dev-server/client?http://localhost8080'
+            'webpack-dev-server/client?http://localhost8080',
     ];
 
-var plugins = PRODUCTION
+const plugins = PRODUCTION
     ?   [
-            new webpack.optimize.UglifyJsPlugin({
-                // comments: true,
-                // mangle: false,
-                // compress: {
-                //     warnings: true
-                // }
-            }),
+            new webpack.optimize.UglifyJsPlugin(),
             new ExtratTextPlugin('style-[contenthash:10].css'),
             new HTMLWebpackPlugin({
                 template: 'index-template.html'
             })
-    ]
+        ]
     :   [ new webpack.HotModuleReplacementPlugin() ];
 
 plugins.push(
@@ -44,30 +41,31 @@ const cssIndentifier = PRODUCTION ? '[hash:base64:10]' : '[path][name]---[local]
 
 // inject into head in DEV and create CSS file in PROD
 const cssLoader = PRODUCTION
-    ?   ExtratTextPlugin.extract({
-            loader: 'css-loader?localIdentName=' + cssIndentifier
+    ?   ExtractTextPlugin.extract({
+            loader: 'css-loader?minimize&localIdentName=' + cssIndentifier
         })
-    :   ['style-loader', 'css-loader?localIdentName=' + cssIndentifier ];
+    :   ['style-loader', 'css-loader?localIdentName=' + cssIndentifier];
 
 module.exports = {
     devtool: 'source-map', //add source mapping to devtools
     entry: entry,
     plugins: plugins,
+    externals: {
+        jquery: 'jQuery' //jquery is external and availabe at the global variable jQuery
+    },
     module: {
         loaders: [{
             test: /\.js$/,
             loaders:['babel-loader'],
-            exclude: '/node_modules/'
-        },
-        {
+            exclude: /node_modules/
+        }, {
             test: /\.(png|jpg|gif)$/,
             loaders:['url-loader?10000&name=images/[hash.12].[ext]'],//use url loader if image is over 10k : use file loader
-            exclude: '/node_modules/'
-        },
-        {
+            exclude: /node_modules/
+        }, {
             test: /\.css$/,
             loaders: cssLoader,
-            exclude: '/node_modules/'
+            exclude: /node_modules/
         }]
     },
     output: {

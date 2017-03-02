@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtratTextPlugin = require('extract-text-webpack-plugin');
 
 // development variables
 var DEVELOPMENT = process.env.NODE_ENV === 'development';
@@ -22,7 +23,8 @@ var plugins = PRODUCTION
                 // compress: {
                 //     warnings: true
                 // }
-            })
+            }),
+            new ExtratTextPlugin('style.css')
     ]
     :   [ new webpack.HotModuleReplacementPlugin() ];
 
@@ -32,6 +34,16 @@ plugins.push(
         PRODUCTION: JSON.stringify(PRODUCTION),
     })
 );
+
+// add class name devepending on enviroment
+const cssIndentifier = PRODUCTION ? '[hash:base64:10]' : '[path][name]--[local]';
+
+// inject into head in DEV and create CSS file in PROD
+const cssLoader = PRODUCTION
+    ?   ExtratTextPlugin.extract({
+            loader: 'css-loader?localIdentName=' + cssIndentifier
+        })
+    :   ['style-loader', 'css-loader?localIdentName=' + cssIndentifier ];
 
 module.exports = {
     devtool: 'source-map', //add source mapping to devtools
@@ -46,6 +58,11 @@ module.exports = {
         {
             test: /\.(png|jpg|gif)$/,
             loaders:['url-loader?10000&name=images/[hash.12].[ext]'],//use url loader if image is over 10k : use file loader
+            exclude: '/node_modules/'
+        },
+        {
+            test: /\.css$/,
+            loaders: cssLoader,
             exclude: '/node_modules/'
         }]
     },

@@ -1,9 +1,6 @@
 body {
     background-color: lightcyan;
     display: flex;
-}
-
-:local(.box) {
-    background-color: white;
-    padding: 1em;
+    color: teal
+    ;
 }

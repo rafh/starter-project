@@ -29,8 +29,6 @@ document.getElementById('loadPage2').addEventListener('click', () => {
         });
 });
 
-// Button.attachEl();
-
 if (DEVELOPMENT) {
     if (module.hot) {
         module.hot.accept();

@@ -1,4 +1,9 @@
+import Forest from './image';
 import Jungle from './image';
 
-const page = `<h1>This is page 1</h1><div>${Jungle}</div>`;
+const page = `
+    <h1>Gallery</h1>
+    <div>${Jungle.jungle}</div>
+    <div>${Forest.forest}</div>
+`;
 export default page;

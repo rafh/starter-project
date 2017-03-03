@@ -28,6 +28,7 @@ const plugins = PRODUCTION
             })
         ]
     :   [
+            new webpack.LoaderOptionsPlugin({ options: { postcss: [ autoprefixer(), ] } }),
             new webpack.HotModuleReplacementPlugin({
                 devServer: {
                     hot: true
@@ -50,7 +51,7 @@ const cssLoader = PRODUCTION
     ?   ExtractTextPlugin.extract({
             use: 'css-loader?minimize&localIdentName=' + cssIndentifier
         })
-    :   ['style-loader','css-loader?localIdentName=' + cssIndentifier,
+    :   ['style-loader','css-loader?localIdentName=' + cssIndentifier, 'sass-loader',
             {
                 loader: 'postcss-loader',
                 options: {
@@ -76,7 +77,7 @@ module.exports = {
             use:['url-loader?10000&name=images/[hash.12].[ext]'],//use url loader if image is over 10k : use file loader
             exclude: /node_modules/
         }, {
-            test: /\.css$/,
+            test: /\.scss$/,
             use: cssLoader,
             exclude: /node_modules/
         }]

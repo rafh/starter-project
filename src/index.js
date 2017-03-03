@@ -1,15 +1,15 @@
-var style = require('./style/global.css');
+var style = require('./style/button.scss');
+var style = require('./style/global.scss');
 
 import $ from 'jquery';
 
 var app = document.getElementById('app');
 app.innerHTML = `
     <div id="menu">
-        <button id="loadPage1">Load Page 1</button>
-        <button id="loadPage2">Load Page 2</button>
+        <a id="loadPage1" class="btn btn--shimmer"><span>Gallery</span></a>
+        <a id="loadPage2" class="btn btn--shimmer"><span>Blog</span></a>
     </div>
     <div id="content">
-        <h1>Homes</h1>
     </div>
 `;
 

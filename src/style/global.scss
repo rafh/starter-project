@@ -1,0 +1,16 @@
+$marron: #7F1637;
+$bodyFont: 'Arial', sans-serif;
+
+body {
+    background-color: $marron;
+    font-family: $bodyFont;
+    color: white;
+}
+
+#content {
+    padding: 2em;
+}
+
+img {
+    max-width: 100%;
+}

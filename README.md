@@ -1,10 +1,9 @@
 
 ## Start Project
-yarn install - installs all dependencies
-yarn run build - for production code
-yarn run dev - for development
-"dev": "NODE_ENV=development webpack-dev-server"
-"dev": "NODE_ENV=development node dev-server.js"
+yarn install - installs all dependencies <br>
+yarn run build - for production code <br>
+yarn run dev - for development <br>
+
 ## FYI
-index.html file is used for development
-index-template.html file is used for production
+index.html file is used for development <br>
+index-template.html file is used for production <br>

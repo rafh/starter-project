@@ -34,6 +34,10 @@ const plugins = PRODUCTION
                     hot: true
                 }
             }),
+			new webpack.ProvidePlugin({
+	            $: 'jquery',
+	            jQuery: 'jquery'
+	        })
         ];
 
 plugins.push(
@@ -65,7 +69,7 @@ module.exports = {
     entry: entry,
     plugins: plugins,
     externals: {
-        jquery: 'jQuery' //jquery is external and availabe at the global variable jQuery
+        // jquery: 'jQuery' //jquery is external and availabe at the global variable jQuery
     },
     module: {
         rules: [{

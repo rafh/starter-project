@@ -1,4 +1,3 @@
-var style = require('./style/button.scss');
 var style = require('./style/global.scss');
 
 import $ from 'jquery';
@@ -6,8 +5,8 @@ import $ from 'jquery';
 var app = document.getElementById('app');
 app.innerHTML = `
     <div id="menu">
-        <a id="loadPage1" class="btn btn--shimmer"><span>Gallery</span></a>
-        <a id="loadPage2" class="btn btn--shimmer"><span>Blog</span></a>
+        <a id="loadPage1"><span>Page One</span></a><br>
+        <a id="loadPage2"><span>Page Two</span></a>
     </div>
     <div id="content">
     </div>

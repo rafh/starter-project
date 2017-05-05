@@ -16,7 +16,7 @@ const entry = PRODUCTION
     :   [
             './src/index.js',
             'webpack/hot/dev-server',
-            'webpack-dev-server/client?http://localhost8080',
+            'webpack-dev-server/client?http://localhost:8080',
     ];
 
 const plugins = PRODUCTION
@@ -30,9 +30,9 @@ const plugins = PRODUCTION
     :   [
             new webpack.LoaderOptionsPlugin({ options: { postcss: [ autoprefixer(), ] } }),
             new webpack.HotModuleReplacementPlugin({
-                devServer: {
-                    hot: true
-                }
+                // devServer: {
+                //     hot: true
+                // }
             }),
 			new webpack.ProvidePlugin({
 	            $: 'jquery',
@@ -92,3 +92,7 @@ module.exports = {
         filename: PRODUCTION ? 'bundle.[hash:12].min.js' : 'bundle.js'
     }
 };
+
+devServer: {
+	hot: true
+}

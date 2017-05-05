@@ -8,10 +8,10 @@
     "dev": "NODE_ENV=development webpack-dev-server"
   },
   "repository": "https://github.com/rafh/starter-project.git",
-  "author": "Rafael Heard rafael.heard@gmail.com",
+  "author": "Rafael Heard (rafael.heard@gmail.com)",
   "license": "ISC",
   "dependencies": {
-	  "jquery": "^3.2.1"
+    "jquery": "^3.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.6",

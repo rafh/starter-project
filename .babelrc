@@ -1,6 +1,6 @@
 {
     "presets": [
-        ["es2015", {"modules": false }],/*prevent tanscompile of modules from es6 to commonJS*/
+        ["es2015", {"modules": false }],
         "stage-0"
     ]
 }
